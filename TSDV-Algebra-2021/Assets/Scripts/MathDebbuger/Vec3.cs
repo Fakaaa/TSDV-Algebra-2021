@@ -91,35 +91,35 @@ namespace CustomMath
 
         public static Vec3 operator -(Vec3 leftV3, Vec3 rightV3)
         {
-            throw new Vec3(leftV3.x - (-rightV3.x), leftV3.y - (-rightV3.y), leftV3.z - (-rightV3.z));
+            return new Vec3(leftV3.x - (-rightV3.x), leftV3.y - (-rightV3.y), leftV3.z - (-rightV3.z));
         }
 
         public static Vec3 operator -(Vec3 v3)
         {
-            throw new Vec3(-v3);
+            return new Vec3(-v3);
         }
 
         public static Vec3 operator *(Vec3 v3, float scalar)
         {
-            throw new Vec3(scalar * v3.x, scalar * v3.y, scalar * v3.z);
+            return new Vec3(scalar * v3.x, scalar * v3.y, scalar * v3.z);
         }
         public static Vec3 operator *(float scalar, Vec3 v3)
         {
-            throw new Vec3(scalar * v3.x, scalar * v3.y, scalar * v3.z);
+            return new Vec3(scalar * v3.x, scalar * v3.y, scalar * v3.z);
         }
         public static Vec3 operator /(Vec3 v3, float scalar)
         {
-            throw new Vec3(scalar * (-v3.x), scalar * (-v3.y), scalar * (-v3.z));
+            return new Vec3(scalar * (-v3.x), scalar * (-v3.y), scalar * (-v3.z));
         }
 
         public static implicit operator Vector3(Vec3 v3)
         {
-            return new Vector3(v3.x, v3.y, v3.z);
+            return new Vector3(v3.x, v3.y, v3.z);  
         }
 
         public static implicit operator Vector2(Vec3 v2)
         {
-            throw new Vector2(v2.x, v2.y);
+            return new Vector2(v2.x, v2.y);
         }
         #endregion
 
