@@ -18,7 +18,6 @@ public class Tester : MonoBehaviour
         Vector3Debugger.EnableEditorView("elAzul");
         Vector3Debugger.AddVector(Vector3.down * 7, Color.green, "elVerde");
         Vector3Debugger.EnableEditorView("elVerde");
-
     }
 
     // Update is called once per frame
@@ -36,6 +35,10 @@ public class Tester : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             Vector3Debugger.TurnOnVector("elAzul");
+        }
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            
         }
     }
 
