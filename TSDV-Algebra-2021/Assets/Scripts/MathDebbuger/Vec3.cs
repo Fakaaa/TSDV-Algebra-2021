@@ -18,6 +18,9 @@ namespace CustomMath
 
         #region constants
         public const float epsilon = 1e-05f;
+        public const float i = 1.0f;
+        public const float j = 1.0f;
+        public const float k = 1.0f;
         #endregion
 
         #region Default Values
@@ -114,7 +117,7 @@ namespace CustomMath
 
         public static implicit operator Vector3(Vec3 v3)
         {
-            return new Vector3(v3.x, v3.y, v3.z);  
+            return new Vector3(v3.x, v3.y, v3.z);
         }
 
         public static implicit operator Vector2(Vec3 v2)
@@ -142,7 +145,10 @@ namespace CustomMath
         }
         public static Vec3 Cross(Vec3 a, Vec3 b)
         {
-            throw new NotImplementedException();
+            float X = 1 * ((a.y * b.z) - (a.z * b.y));
+            float Y =-1 * ((a.x * b.z) - (a.z * b.x));
+            float Z = 1 * ((a.x * b.y) - (a.y * b.x));
+            return new Vec3(X,Y,Z);
         }
         public static float Distance(Vec3 a, Vec3 b)
         {
