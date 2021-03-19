@@ -30,10 +30,10 @@ public class TestLerp : MonoBehaviour
     }
     void Update()
     {
-        this.transform.position = new Vec3(Vec3.Lerp(b, a, distanceElapsed));
+        this.transform.position = new Vec3(Vec3.LerpUnclamped(b, a, distanceElapsed));
+        Debug.DrawLine(a, b, Color.red);
 
         #region // Move in time automatic
-
         if (reachMin && !reachMax)
             distanceElapsed += 1 * Time.deltaTime;
         if (reachMax && !reachMin)
