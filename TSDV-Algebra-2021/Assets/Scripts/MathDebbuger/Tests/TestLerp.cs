@@ -13,6 +13,9 @@ public class TestLerp : MonoBehaviour
     private Vec3 a;
     private Vec3 b;
 
+    private bool reachMax;
+    private bool reachMin;
+
     private void Start()
     {
         a.x = start.transform.position.x;
@@ -21,11 +24,33 @@ public class TestLerp : MonoBehaviour
         b.x = toReach.transform.position.x;
         b.y = toReach.transform.position.y;
         b.z = toReach.transform.position.z;
+
+        reachMax = false;
+        reachMin = false;
     }
     void Update()
     {
         this.transform.position = new Vec3(Vec3.Lerp(b, a, distanceElapsed));
 
+        #region // Move in time automatic
+
+        if (reachMin && !reachMax)
+            distanceElapsed += 1 * Time.deltaTime;
+        if (reachMax && !reachMin)
+            distanceElapsed -= 1 * Time.deltaTime;
+        if (distanceElapsed <= 0)
+        {
+            reachMin = true;
+            reachMax = false;
+        }
+        else if (distanceElapsed >= 1)
+        {
+            reachMin = false;
+            reachMax = true;
+        }
+        #endregion
+
+        #region // Move manually
         if (Input.GetKey(KeyCode.D))
         {
             if (distanceElapsed < 1)
@@ -36,5 +61,6 @@ public class TestLerp : MonoBehaviour
             if (distanceElapsed > 0)
                 distanceElapsed -= 2 * Time.deltaTime;
         }
+        #endregion
     }
 }
