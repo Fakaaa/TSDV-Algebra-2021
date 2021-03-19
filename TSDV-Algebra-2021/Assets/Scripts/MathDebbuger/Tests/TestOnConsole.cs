@@ -37,9 +37,4 @@ public class TestOnConsole : MonoBehaviour
         Debug.Log("Producto cruz Vec3: " + Vec3.Cross(vec3_1, vecToCross));
         #endregion
     }
-
-    void Update()
-    {
-
-    }
 }

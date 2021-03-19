@@ -146,9 +146,9 @@ namespace CustomMath
         public static Vec3 Cross(Vec3 a, Vec3 b)
         {
             float X = 1 * ((a.y * b.z) - (a.z * b.y));
-            float Y =-1 * ((a.x * b.z) - (a.z * b.x));
+            float Y = -1 * ((a.x * b.z) - (a.z * b.x));
             float Z = 1 * ((a.x * b.y) - (a.y * b.x));
-            return new Vec3(X,Y,Z);
+            return new Vec3(X, Y, Z);
         }
         public static float Distance(Vec3 a, Vec3 b)
         {
@@ -160,11 +160,12 @@ namespace CustomMath
         }
         public static Vec3 Lerp(Vec3 a, Vec3 b, float t)
         {
-            throw new NotImplementedException();
+            t = Mathf.Clamp(t, 0, 1);
+            return new Vec3((a * (1-t)+ b * t));
         }
         public static Vec3 LerpUnclamped(Vec3 a, Vec3 b, float t)
         {
-            throw new NotImplementedException();
+            return new Vec3((a * (1 - t) + b * t));
         }
         public static Vec3 Max(Vec3 a, Vec3 b)
         {
