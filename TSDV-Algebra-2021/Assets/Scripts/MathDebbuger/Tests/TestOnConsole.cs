@@ -45,6 +45,9 @@ public class TestOnConsole : MonoBehaviour
         Debug.Log("Distancia entre vectores Vec3: " + Vec3.Distance(vec3_1, vec3_2));
         #endregion
         Debug.Log("------------------------------");
-
+        #region //Visualizar el angulo entre dos vectores
+        Debug.Log("Angulo entre vectores (Vector3):" + Vector3.Angle(vectororiginal_1, vectororiginal_2));
+        Debug.Log("Angulo entre vectores (Vec3):" + Vec3.Angle(vec3_1, vec3_2));
+        #endregion
     }
 }

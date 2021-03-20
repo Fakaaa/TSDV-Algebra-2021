@@ -133,7 +133,10 @@ namespace CustomMath
         }
         public static float Angle(Vec3 from, Vec3 to)
         {
-            throw new NotImplementedException();
+            float dotResult = (Dot(from, to));
+            float magProduct = (Magnitude(from) * Magnitude(to));
+            float cosTitha = (dotResult / magProduct);
+            return magProduct;
         }
         public static Vec3 ClampMagnitude(Vec3 vector, float maxLength)
         {
