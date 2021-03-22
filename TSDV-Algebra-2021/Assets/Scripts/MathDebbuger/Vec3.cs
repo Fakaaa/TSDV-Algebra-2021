@@ -135,8 +135,8 @@ namespace CustomMath
         {
             float dotResult = (Dot(from, to));
             float magProduct = (Magnitude(from) * Magnitude(to));
-            float cosTitha = (dotResult / magProduct);
-            return magProduct;
+            float arcosTitha = Mathf.Acos(dotResult / magProduct);
+            return arcosTitha;
         }
         public static Vec3 ClampMagnitude(Vec3 vector, float maxLength)
         {
@@ -172,11 +172,37 @@ namespace CustomMath
         }
         public static Vec3 Max(Vec3 a, Vec3 b)
         {
-            throw new NotImplementedException();
+            float newX, newY, newZ;
+            if (a.x > b.x)
+                newX = a.x;
+            else
+                newX = b.x;
+            if (a.y > b.y)
+                newY = a.y;
+            else
+                newY = b.y;
+            if (a.z > b.z)
+                newZ = a.z;
+            else
+                newZ = b.z;
+            return new Vec3(newX,newY,newZ);
         }
         public static Vec3 Min(Vec3 a, Vec3 b)
         {
-            throw new NotImplementedException();
+            float newX, newY, newZ;
+            if (a.x < b.x)
+                newX = a.x;
+            else
+                newX = b.x;
+            if (a.y < b.y)
+                newY = a.y;
+            else
+                newY = b.y;
+            if (a.z < b.z)
+                newZ = a.z;
+            else
+                newZ = b.z;
+            return new Vec3(newX, newY, newZ);
         }
         public static float SqrMagnitude(Vec3 vector)
         {
@@ -192,7 +218,9 @@ namespace CustomMath
         }
         public void Set(float newX, float newY, float newZ)
         {
-            throw new NotImplementedException();
+            x = newX;
+            y = newY;
+            z = newZ;
         }
         public void Scale(Vec3 scale)
         {

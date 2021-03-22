@@ -49,5 +49,20 @@ public class TestOnConsole : MonoBehaviour
         Debug.Log("Angulo entre vectores (Vector3):" + Vector3.Angle(vectororiginal_1, vectororiginal_2));
         Debug.Log("Angulo entre vectores (Vec3):" + Vec3.Angle(vec3_1, vec3_2));
         #endregion
+        Debug.Log("------------------------------");
+        #region //Visualizar magnitud clampeada
+        //Debug.Log("Magnitud clampeada vectores (Vector3):" + Vector3.ClampMagnitude(vectororiginal_1, 2));
+        //Debug.Log("Magnitud clampeada vectores (Vec3):" + Vec3.ClampMagnitude(vec3_1, 2));
+        #endregion
+        Debug.Log("------------------------------");
+        #region //Visualizar maximo entres dos Vectores
+        Debug.Log("Maximo entre vectores (Vector3):" + Vector3.Max(vectororiginal_1, vectororiginal_2));
+        Debug.Log("Maximo entre vectores (Vec3):" + Vec3.Max(vec3_1, vec3_2));
+        #endregion
+        Debug.Log("------------------------------");
+        #region //Visualizar minimo entres dos Vectores
+        Debug.Log("Minimo entre vectores (Vector3):" + Vector3.Min(vectororiginal_1, vectororiginal_2));
+        Debug.Log("Minimo entre vectores (Vec3):" + Vec3.Min(vec3_1, vec3_2));
+        #endregion
     }
 }
