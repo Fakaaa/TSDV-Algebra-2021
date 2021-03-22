@@ -227,11 +227,11 @@ namespace CustomMath
         }
         public void Scale(Vec3 scale)
         {
-            throw new NotImplementedException();
+            Set(x * scale.x, y * scale.y, z * scale.z);
         }
         public void Normalize()
         {
-            throw new NotImplementedException();
+            Set(normalized.x, normalized.y, normalized.z);
         }
         #endregion
 
