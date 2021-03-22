@@ -51,8 +51,8 @@ public class TestOnConsole : MonoBehaviour
         #endregion
         Debug.Log("------------------------------");
         #region //Visualizar magnitud clampeada
-        //Debug.Log("Magnitud clampeada vectores (Vector3):" + Vector3.ClampMagnitude(vectororiginal_1, 2));
-        //Debug.Log("Magnitud clampeada vectores (Vec3):" + Vec3.ClampMagnitude(vec3_1, 2));
+        Debug.Log("Magnitud clampeada vectores (Vector3):" + Vector3.ClampMagnitude(vectororiginal_1, 2));
+        Debug.Log("Magnitud clampeada vectores (Vec3):" + Vec3.ClampMagnitude(vec3_1, 2));
         #endregion
         Debug.Log("------------------------------");
         #region //Visualizar maximo entres dos Vectores
@@ -64,5 +64,6 @@ public class TestOnConsole : MonoBehaviour
         Debug.Log("Minimo entre vectores (Vector3):" + Vector3.Min(vectororiginal_1, vectororiginal_2));
         Debug.Log("Minimo entre vectores (Vec3):" + Vec3.Min(vec3_1, vec3_2));
         #endregion
+        Debug.Log("------------------------------");
     }
 }

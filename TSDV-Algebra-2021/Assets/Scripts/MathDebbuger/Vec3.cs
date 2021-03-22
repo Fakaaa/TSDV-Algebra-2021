@@ -12,7 +12,7 @@ namespace CustomMath
         public float z;
 
         public float sqrMagnitude { get { throw new NotImplementedException(); } }
-        public Vector3 normalized { get { throw new NotImplementedException(); } }
+        public Vec3 normalized { get { return new Vec3( (x / magnitude), (y / magnitude), z / magnitude); } }
         public float magnitude { get { return Magnitude(new Vec3(x, y, z)); } }
         #endregion
 
@@ -133,14 +133,17 @@ namespace CustomMath
         }
         public static float Angle(Vec3 from, Vec3 to)
         {
-            float dotResult = (Dot(from, to));
-            float magProduct = (Magnitude(from) * Magnitude(to));
+            float dotResult = Dot(from, to);
+            float magProduct = Magnitude(from) * Magnitude(to);
             float arcosTitha = Mathf.Acos(dotResult / magProduct);
-            return arcosTitha;
+            return (arcosTitha) / (Mathf.PI / 180);
         }
         public static Vec3 ClampMagnitude(Vec3 vector, float maxLength)
         {
-            throw new NotImplementedException();
+            if (Magnitude(vector) > maxLength)
+                return vector.normalized * maxLength;
+            else
+                return vector;
         }
         public static float Magnitude(Vec3 vector)
         {
