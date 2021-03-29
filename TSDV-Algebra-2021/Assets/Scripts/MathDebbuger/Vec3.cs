@@ -209,7 +209,7 @@ namespace CustomMath
         }
         public static float SqrMagnitude(Vec3 vector)
         {
-            throw new NotImplementedException();
+            return Mathf.Sqrt(Magnitude(vector));
         }
         public static Vec3 Project(Vec3 vector, Vec3 onNormal)
         {
