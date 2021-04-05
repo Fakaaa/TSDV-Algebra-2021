@@ -54,6 +54,9 @@ public class TestVisualizer : MonoBehaviour
 
                 break;
             case Ejercicio.Cuatro:
+
+                vectorResult = Vec3.Cross(vectorA, vectorB);
+
                 break;
             case Ejercicio.Cinco:
                 break;
