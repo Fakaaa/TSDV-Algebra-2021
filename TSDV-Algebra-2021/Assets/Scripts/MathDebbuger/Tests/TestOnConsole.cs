@@ -65,5 +65,14 @@ public class TestOnConsole : MonoBehaviour
         Debug.Log("Minimo entre vectores (Vec3):" + Vec3.Min(vec3_1, vec3_2));
         #endregion
         Debug.Log("------------------------------");
+        #region //Visualizar Projection
+        Debug.Log("Projection (Vector3):" + Vector3.Project(vectororiginal_1, vectororiginal_2));
+        Debug.Log("Projection (Vec3):" + Vec3.Project(vec3_1, vec3_2));
+        #endregion
+        Debug.Log("------------------------------");
+        #region //Visualizar Reflect
+        Debug.Log("Reflection (Vector3):" + Vector3.Reflect(vectororiginal_1, vectororiginal_2).normalized);
+        Debug.Log("Reflection (Vec3):" + Vec3.Reflect(vec3_1, vec3_2).normalized);
+        #endregion
     }
 }

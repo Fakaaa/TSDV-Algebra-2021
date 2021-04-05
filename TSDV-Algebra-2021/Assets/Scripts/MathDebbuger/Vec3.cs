@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 namespace CustomMath
 {
+    [Serializable]
     public struct Vec3 : IEquatable<Vec3>
     {
         #region Variables
@@ -14,6 +15,7 @@ namespace CustomMath
         public float sqrMagnitude { get { return SqrMagnitude(new Vec3(x, y, z)); } }
         public Vec3 normalized { get { return new Vec3( (x / magnitude), (y / magnitude), z / magnitude); } }
         public float magnitude { get { return Magnitude(new Vec3(x, y, z)); } }
+        public Vector3 convertVec { get { return new Vector3(x, y, z); } }
         #endregion
 
         #region constants
@@ -213,11 +215,15 @@ namespace CustomMath
         }
         public static Vec3 Project(Vec3 vector, Vec3 onNormal)
         {
-            throw new NotImplementedException();
+            return (Dot(vector, onNormal) / Mathf.Pow(Magnitude(onNormal), 2) * onNormal);
         }
         public static Vec3 Reflect(Vec3 inDirection, Vec3 inNormal)
         {
-            throw new NotImplementedException();
+            float num1 = Dot(inDirection, inNormal);
+            float num2 = Mathf.Pow(Magnitude(inNormal), 2);
+            float num3 = num1 / num2;
+            inNormal *= num3;
+            return inNormal;
         }
         public void Set(float newX, float newY, float newZ)
         {
