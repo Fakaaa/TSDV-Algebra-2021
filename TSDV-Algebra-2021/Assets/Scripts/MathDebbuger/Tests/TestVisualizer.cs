@@ -21,6 +21,7 @@ public class TestVisualizer : MonoBehaviour
     [SerializeField] Vec3 vectorA;
     [SerializeField] Vec3 vectorB;
     private Vec3 vectorResult = Vec3.Zero;
+    private float timerToLerp = 0;
 
     void Start()
     {
@@ -36,6 +37,8 @@ public class TestVisualizer : MonoBehaviour
 
     void Update()
     {
+        timerToLerp += Time.deltaTime;
+
         switch (ejercicio)  
         {
             case Ejercicio.Uno:
@@ -59,6 +62,9 @@ public class TestVisualizer : MonoBehaviour
 
                 break;
             case Ejercicio.Cinco:
+
+                vectorResult = Vec3.Lerp(vectorA, vectorB, timerToLerp);
+
                 break;
             case Ejercicio.Seis:
                 break;
@@ -73,6 +79,9 @@ public class TestVisualizer : MonoBehaviour
             default:
                 break;
         }
+
+        if (timerToLerp > 1)
+            timerToLerp = 0;
 
         VectorDebugger.UpdatePosition("A", vectorA);
         VectorDebugger.UpdatePosition("B", vectorB);
