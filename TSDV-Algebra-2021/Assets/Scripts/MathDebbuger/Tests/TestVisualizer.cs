@@ -67,14 +67,29 @@ public class TestVisualizer : MonoBehaviour
 
                 break;
             case Ejercicio.Seis:
+
+                vectorResult = Vec3.Max(vectorA, vectorB);
+
                 break;
             case Ejercicio.Siete:
+
+                vectorResult = Vec3.Project(vectorA, vectorB);
+
                 break;
-            case Ejercicio.Ocho:
+            case Ejercicio.Ocho: //No se muy bien que es
+
+                //vectorResult = vectorB - vectorA;
+
                 break;
-            case Ejercicio.Nueve:
+            case Ejercicio.Nueve: //Es reflect pero no me funca bien
+
+                //vectorResult = Vec3.Reflect(vectorA,vectorB);
+                
                 break;
-            case Ejercicio.Diez:
+            case Ejercicio.Diez: //Creo que es lerp unclamped
+
+                //vectorResult = Vec3.LerpUnclamped(vectorA, vectorB, timerToLerp);
+
                 break;
             default:
                 break;
