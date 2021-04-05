@@ -49,6 +49,9 @@ public class TestVisualizer : MonoBehaviour
 
                 break;
             case Ejercicio.Tres:
+
+                vectorResult = vectorA * vectorB.x;
+
                 break;
             case Ejercicio.Cuatro:
                 break;

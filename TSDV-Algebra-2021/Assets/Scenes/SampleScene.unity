@@ -696,7 +696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 472f3cbd8d2f4c746b91e784c794da93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ejercicio: 1
+  ejercicio: 2
   vectorColor: {r: 0.8117647, g: 0.058823515, b: 0.4793073, a: 0}
   vectorA:
     x: 5
