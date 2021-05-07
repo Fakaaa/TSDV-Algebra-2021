@@ -221,7 +221,7 @@ namespace CustomMath
         {
             float num1 = Dot(inDirection, inNormal);
             float num2 = Mathf.Pow(Magnitude(inNormal), 2);
-            float num3 = num1 / num2;
+            float num3 = num1 / (-num2);
             inNormal *= num3;
             return inNormal;
         }

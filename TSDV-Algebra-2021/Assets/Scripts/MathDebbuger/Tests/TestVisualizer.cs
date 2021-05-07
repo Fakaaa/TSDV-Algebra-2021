@@ -1,8 +1,5 @@
 ﻿using EjerciciosAlgebra;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using MathDebbuger;
 using CustomMath;
 
 public class TestVisualizer : MonoBehaviour
@@ -65,6 +62,9 @@ public class TestVisualizer : MonoBehaviour
 
                 vectorResult = Vec3.Lerp(vectorA, vectorB, timerToLerp);
 
+                if (timerToLerp > 1)
+                    timerToLerp = 0;
+
                 break;
             case Ejercicio.Seis:
 
@@ -78,25 +78,22 @@ public class TestVisualizer : MonoBehaviour
                 break;
             case Ejercicio.Ocho: //No se muy bien que es
 
-                //vectorResult = vectorB - vectorA;
+                vectorResult = new Vec3(vectorA.x + vectorB.x, vectorA.y + vectorB.y, vectorA.z + vectorB.z);
 
                 break;
             case Ejercicio.Nueve: //Es reflect pero no me funca bien
 
-                //vectorResult = Vec3.Reflect(vectorA,vectorB);
+                vectorResult = Vec3.Reflect(vectorA,vectorB);
                 
                 break;
             case Ejercicio.Diez: //Creo que es lerp unclamped
 
-                //vectorResult = Vec3.LerpUnclamped(vectorA, vectorB, timerToLerp);
+                vectorResult = Vec3.LerpUnclamped(vectorA, vectorB, timerToLerp);
 
                 break;
             default:
                 break;
         }
-
-        if (timerToLerp > 1)
-            timerToLerp = 0;
 
         VectorDebugger.UpdatePosition("A", vectorA);
         VectorDebugger.UpdatePosition("B", vectorB);
