@@ -18,22 +18,22 @@ namespace CustomMath
         #endregion
 
         #region Functions
-       // public myPlane(Vec3 inNormal, Vec3 inPloint)
-       // {
-       //     normal = inNormal;
-       //     point = inPloint;
-       // }
-       // public myPlane(Vec3 inNormal, float d)
-       // {
-       //     normal = inNormal;
-       //     distance = d;
-       // }
-       // public myPlane(Vec3 inA, Vec3 inB, Vec3 inC)
-       // {
-       //     a = inA;
-       //     b = inB;
-       //     c = inC;
-       // }
+        //public myPlane(Vec3 inNormal, Vec3 inPloint)
+        //{
+        //    normal = inNormal.normalized;
+        //    point = Vec3.Dot();
+        //}
+        //public myPlane(Vec3 inNormal, float d)
+        //{
+        //    normal = inNormal;
+        //    distance = d;
+        //}
+        //public myPlane(Vec3 inA, Vec3 inB, Vec3 inC)
+        //{
+        //    a = inA;
+        //    b = inB;
+        //    c = inC;
+        //}
         #endregion
     }
 }

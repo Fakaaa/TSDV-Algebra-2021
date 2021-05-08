@@ -51,10 +51,12 @@ public class CreateRoom : MonoBehaviour
 
         if ( upBool && backBool && leftBool && rightBool && downBool && frontBool)
         {
+            cubePoint.gameObject.GetComponent<MeshRenderer>().enabled = true;
             Debug.Log("El cubo esta dentro de la habitacion");
         }
         else
         {
+            cubePoint.gameObject.GetComponent<MeshRenderer>().enabled = false;
             Debug.Log("El cubo esta fuera de la habitacion");
         }
     }

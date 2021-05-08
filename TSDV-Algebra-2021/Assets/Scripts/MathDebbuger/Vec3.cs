@@ -154,7 +154,7 @@ namespace CustomMath
         public static Vec3 Cross(Vec3 a, Vec3 b)
         {
             float newX = 1 * ((a.y * b.z) - (a.z * b.y));
-            float newY = -1 * ((a.x * b.z) - (a.z * b.x));
+            float newY =-1 * ((a.x * b.z) - (a.z * b.x));
             float newZ = 1 * ((a.x * b.y) - (a.y * b.x));
             return new Vec3(newX, newY, newZ);
         }
@@ -219,11 +219,13 @@ namespace CustomMath
         }
         public static Vec3 Reflect(Vec3 inDirection, Vec3 inNormal)
         {
-            float num1 = Dot(inDirection, inNormal);
-            float num2 = Mathf.Pow(Magnitude(inNormal), 2);
-            float num3 = num1 / (-num2);
-            inNormal *= num3;
-            return inNormal;
+            //float num1 = Dot(inDirection, inNormal);
+            //float num2 = Mathf.Pow(Magnitude(inNormal), 2);
+            //float num3 = num1 / (-num2);
+            //inNormal *= num3;
+            //return inNormal;
+            inNormal.Normalize();
+            return inDirection - 2 * (-Dot(inDirection, inNormal)) * inNormal;
         }
         public void Set(float newX, float newY, float newZ)
         {

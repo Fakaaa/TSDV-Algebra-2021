@@ -36,7 +36,7 @@ public class TestVisualizer : MonoBehaviour
     {
         timerToLerp += Time.deltaTime;
 
-        switch (ejercicio)  
+        switch (ejercicio)
         {
             case Ejercicio.Uno:
 
@@ -81,15 +81,14 @@ public class TestVisualizer : MonoBehaviour
                 vectorResult = new Vec3(vectorA.x + vectorB.x, vectorA.y + vectorB.y, vectorA.z + vectorB.z);
 
                 break;
-            case Ejercicio.Nueve: //Es reflect pero no me funca bien
+            case Ejercicio.Nueve: //Es reflect pero a veces funca y otras no
 
-                vectorResult = Vec3.Reflect(vectorA,vectorB);
-                
+                vectorResult = Vec3.Reflect(vectorA, vectorB);
+
                 break;
-            case Ejercicio.Diez: //Creo que es lerp unclamped
+            case Ejercicio.Diez: 
 
                 vectorResult = Vec3.LerpUnclamped(vectorA, vectorB, timerToLerp);
-
                 break;
             default:
                 break;
