@@ -101,7 +101,7 @@ namespace CustomMath
 
         public static Vec3 operator -(Vec3 v3)
         {
-            return new Vec3(-v3);
+            return (-1)*v3;
         }
 
         public static Vec3 operator *(Vec3 v3, float scalar)

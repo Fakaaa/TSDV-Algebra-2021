@@ -6,18 +6,19 @@ using MathDebbuger;
 
 public class CreateFrustrum : MonoBehaviour
 {
-    public Plane far;
-    public Plane near;
-    public Plane left;
-    public Plane right;
-    public Plane top;
-    public Plane bot;
+    public myPlane far;
+    public myPlane near;
+    public myPlane left;
+    public myPlane right;
+    public myPlane top;
+    public myPlane bot;
 
     [SerializeField] GameObject prefabPoint;
     [SerializeField] GameObject[] pointsFrustrum;
 
-    [SerializeField] public List<Vec3> points;
+    [SerializeField] public List<Vec3> initialPoints;
 
+    [SerializeField] private Vec3[] pointsToVec3;
     [SerializeField] public CanBeRender[] objectsInScene;
 
     private bool upBool;
@@ -33,22 +34,21 @@ public class CreateFrustrum : MonoBehaviour
 
         for (int i = 0; i < pointsFrustrum.Length; i++)
         {
-            pointsFrustrum[i] = Instantiate(prefabPoint, points[i], transform.rotation, transform);
+            pointsFrustrum[i] = Instantiate(prefabPoint, initialPoints[i], transform.rotation, transform);
             pointsFrustrum[i].name = "Point" + i.ToString();
         }
 
-        near = new Plane(pointsFrustrum[0].transform.position, pointsFrustrum[1].transform.position,
-            pointsFrustrum[2].transform.position);
-        right = new Plane(pointsFrustrum[5].transform.position, pointsFrustrum[4].transform.position,
-            pointsFrustrum[3].transform.position);
-        left = new Plane(pointsFrustrum[6].transform.position, pointsFrustrum[7].transform.position,
-            pointsFrustrum[2].transform.position);
-        bot = new Plane(pointsFrustrum[7].transform.position, pointsFrustrum[4].transform.position,
-            pointsFrustrum[3].transform.position);
-        top = new Plane(pointsFrustrum[5].transform.position, pointsFrustrum[6].transform.position,
-            pointsFrustrum[0].transform.position);
-        far = new Plane(pointsFrustrum[6].transform.position, pointsFrustrum[5].transform.position,
-            pointsFrustrum[4].transform.position);
+        for (int i = 0; i < pointsToVec3.Length; i++)
+        {
+            pointsToVec3[i] = new Vec3(pointsFrustrum[i].transform.position);
+        }
+
+        near = new myPlane(pointsToVec3[0], pointsToVec3[1], pointsToVec3[3]);
+        right = new myPlane(pointsToVec3[5], pointsToVec3[4], pointsToVec3[3]);
+        left = new myPlane(pointsToVec3[2], pointsToVec3[7], pointsToVec3[6]);
+        bot = new myPlane(pointsToVec3[2], pointsToVec3[3], pointsToVec3[4]);
+        top = new myPlane(pointsToVec3[5], pointsToVec3[6], pointsToVec3[0]);
+        far = new myPlane(pointsToVec3[6], pointsToVec3[5], pointsToVec3[4]);
 
         /*
         far = new Plane(points[4], points[6]);
@@ -58,17 +58,13 @@ public class CreateFrustrum : MonoBehaviour
         left = new Plane(points[0], points[7]);
         right = new Plane(points[1], points[6]);
         */
-
-        //left.Flip();
-        right.Flip();
-        near.Flip();
     }
 
     void Update()
     {
         RenderObjects();
 
-        //UpdatePointsPositions();
+        UpdatePointsPositions();
 
         UpdateFrustrumPlanes();
     }
@@ -80,72 +76,48 @@ public class CreateFrustrum : MonoBehaviour
 
     public void UpdatePointsPositions()
     {
-        for (int i = 0; i < points.Count; i++)
+        for (int i = 0; i < pointsToVec3.Length; i++)
         {
-            points[i] += new Vec3(transform.position.x, transform.position.y, transform.position.z);
+            pointsToVec3[i].Set(pointsFrustrum[i].transform.position.x, pointsFrustrum[i].transform.position.y, pointsFrustrum[i].transform.position.z);
         }
     }
 
     public void UpdateFrustrumPlanes()
     {
-        //far = new Plane(pointsFrustrum[4].transform.position, pointsFrustrum[6].transform.position);
-        //near = new Plane(pointsFrustrum[0].transform.position, pointsFrustrum[2].transform.position);
-        //top = new Plane(pointsFrustrum[3].transform.position, pointsFrustrum[6].transform.position);
-        //bot = new Plane(pointsFrustrum[0].transform.position, pointsFrustrum[5].transform.position);
-        //left = new Plane(pointsFrustrum[0].transform.position, pointsFrustrum[7].transform.position);
-        //right = new Plane(pointsFrustrum[1].transform.position, pointsFrustrum[6].transform.position);
+        near.Set3Points(pointsToVec3[0], pointsToVec3[1], pointsToVec3[3]);
 
-        near.Set3Points(pointsFrustrum[0].transform.position, pointsFrustrum[1].transform.position,
-            pointsFrustrum[2].transform.position);
+        right.Set3Points(pointsToVec3[5], pointsToVec3[4], pointsToVec3[3]);
 
-        right.Set3Points(pointsFrustrum[5].transform.position, pointsFrustrum[4].transform.position,
-            pointsFrustrum[3].transform.position);
-        
-        left.Set3Points(pointsFrustrum[6].transform.position, pointsFrustrum[7].transform.position,
-            pointsFrustrum[2].transform.position);
-        
-        bot.Set3Points(pointsFrustrum[7].transform.position, pointsFrustrum[4].transform.position,
-            pointsFrustrum[3].transform.position);
-        
-        top.Set3Points(pointsFrustrum[5].transform.position, pointsFrustrum[6].transform.position,
-            pointsFrustrum[0].transform.position);
-        
-        far.Set3Points(pointsFrustrum[6].transform.position, pointsFrustrum[5].transform.position,
-            pointsFrustrum[4].transform.position);
-        /*
-        far = new Plane(points[4], points[6]);
-        near = new Plane(points[0], points[2]);
-        top = new Plane(points[3], points[6]);
-        bot = new Plane(points[0], points[5]);
-        left = new Plane(points[0], points[7]);
-        right = new Plane(points[1], points[6]);
-         */
+        left.Set3Points(pointsToVec3[2], pointsToVec3[7], pointsToVec3[6]);
 
-        //far.Flip();
-        //left.Flip();
-        right.Flip();
-        near.Flip();
+        bot.Set3Points(pointsToVec3[2], pointsToVec3[3], pointsToVec3[4]);
+
+        top.Set3Points(pointsToVec3[5], pointsToVec3[6], pointsToVec3[0]);
+
+        far.Set3Points(pointsToVec3[6], pointsToVec3[5], pointsToVec3[4]);
+
     }
 
     public void RenderObjects()
     {
         foreach (CanBeRender renderThing in objectsInScene)
         {
-            upBool = top.GetSide(renderThing.transform.position);
-            downBool = bot.GetSide(renderThing.transform.position);
-            leftBool = left.GetSide(renderThing.transform.position);
-            rightBool = right.GetSide(renderThing.transform.position);
-            farBool = far.GetSide(renderThing.transform.position);
-            nearBool = near.GetSide(renderThing.transform.position);
 
-            Debug.Log("Plano top :" + top.GetSide(renderThing.transform.position));
-            Debug.Log("Plano bot :" + bot.GetSide(renderThing.transform.position));
-            Debug.Log("Plano left :" + left.GetSide(renderThing.transform.position));
-            Debug.Log("Plano right :" + right.GetSide(renderThing.transform.position));
-            Debug.Log("Plano far :" + far.GetSide(renderThing.transform.position));
-            Debug.Log("Plano near :" + near.GetSide(renderThing.transform.position));
+            upBool = top.GetSide(renderThing.getRenderPos());
+            downBool = bot.GetSide(renderThing.getRenderPos());
+            leftBool = left.GetSide(renderThing.getRenderPos());
+            rightBool = right.GetSide(renderThing.getRenderPos());
+            farBool = far.GetSide(renderThing.getRenderPos());
+            nearBool = near.GetSide(renderThing.getRenderPos());
 
-            if (nearBool && upBool && downBool && farBool && leftBool && rightBool)
+            Debug.Log("Plano top :" + top.GetSide(renderThing.getRenderPos()));
+            Debug.Log("Plano bot :" + bot.GetSide(renderThing.getRenderPos()));
+            Debug.Log("Plano left :" + left.GetSide(renderThing.getRenderPos()));
+            Debug.Log("Plano right :" + right.GetSide(renderThing.getRenderPos()));
+            Debug.Log("Plano far :" + far.GetSide(renderThing.getRenderPos()));
+            Debug.Log("Plano near :" + near.GetSide(renderThing.getRenderPos()));
+
+            if (nearBool && farBool && upBool && downBool && leftBool && rightBool)
                 renderThing.RenderMe(true);
             else
                 renderThing.RenderMe(false);
