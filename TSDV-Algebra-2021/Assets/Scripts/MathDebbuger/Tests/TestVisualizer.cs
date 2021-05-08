@@ -78,7 +78,9 @@ public class TestVisualizer : MonoBehaviour
                 break;
             case Ejercicio.Ocho: //No se muy bien que es
 
-                vectorResult = new Vec3(vectorA.x + vectorB.x, vectorA.y + vectorB.y, vectorA.z + vectorB.z);
+                Vec3 sumVecs = vectorA + vectorB;
+
+                vectorResult =  sumVecs.normalized * Vec3.Distance(vectorA, vectorB);
 
                 break;
             case Ejercicio.Nueve: //Es reflect pero a veces funca y otras no

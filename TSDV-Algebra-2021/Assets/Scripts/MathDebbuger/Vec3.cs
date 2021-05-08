@@ -219,11 +219,6 @@ namespace CustomMath
         }
         public static Vec3 Reflect(Vec3 inDirection, Vec3 inNormal)
         {
-            //float num1 = Dot(inDirection, inNormal);
-            //float num2 = Mathf.Pow(Magnitude(inNormal), 2);
-            //float num3 = num1 / (-num2);
-            //inNormal *= num3;
-            //return inNormal;
             inNormal.Normalize();
             return inDirection - 2 * (-Dot(inDirection, inNormal)) * inNormal;
         }
