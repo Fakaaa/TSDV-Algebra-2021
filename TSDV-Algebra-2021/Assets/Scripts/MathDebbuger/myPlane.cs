@@ -10,30 +10,31 @@ namespace CustomMath
     {
         #region Variables
         public Vec3 normal;
-        public Vec3 point;
         public float distance;
-        public Vec3 a;
-        public Vec3 b;
-        public Vec3 c;
         #endregion
 
         #region Functions
-        //public myPlane(Vec3 inNormal, Vec3 inPloint)
-        //{
-        //    normal = inNormal.normalized;
-        //    point = Vec3.Dot();
-        //}
-        //public myPlane(Vec3 inNormal, float d)
-        //{
-        //    normal = inNormal;
-        //    distance = d;
-        //}
-        //public myPlane(Vec3 inA, Vec3 inB, Vec3 inC)
-        //{
-        //    a = inA;
-        //    b = inB;
-        //    c = inC;
-        //}
+        public myPlane(Vec3 inNormal, Vec3 inPoint)
+        {
+            normal = inNormal.normalized;
+            distance = -Vec3.Dot(normal, inPoint);      //Plano definido por una normal y un punto
+        }
+        public myPlane(Vec3 inA, Vec3 inB, Vec3 inC)
+        {
+            Vec3 line1 = inB-inA;
+            Vec3 line2 = inC-inA;   //Plano definido por 3 puntos, 2 sobre la misma linea y uno no colineal
+
+            normal = Vec3.Cross(line1, line2).normalized;
+            distance = - Vec3.Dot(normal, inA);
+        }
+
+        public float GetDistanceToThePoint(Vec3 point)
+        {
+            return Vec3.Dot(normal,point) + distance;
+        }
+
+
+
         #endregion
     }
 }
