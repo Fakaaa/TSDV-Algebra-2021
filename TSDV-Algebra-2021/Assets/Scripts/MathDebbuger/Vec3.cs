@@ -153,9 +153,9 @@ namespace CustomMath
         }
         public static Vec3 Cross(Vec3 a, Vec3 b)
         {
-            float newX = 1 * ((a.y * b.z) - (a.z * b.y));
-            float newY =-1 * ((a.x * b.z) - (a.z * b.x));
-            float newZ = 1 * ((a.x * b.y) - (a.y * b.x));
+            float newX =  1 * ((a.y * b.z) - (a.z * b.y));
+            float newY = -1 * ((a.x * b.z) - (a.z * b.x));
+            float newZ =  1 * ((a.x * b.y) - (a.y * b.x));
             return new Vec3(newX, newY, newZ);
         }
         public static float Distance(Vec3 a, Vec3 b)
