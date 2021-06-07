@@ -86,7 +86,7 @@ public class TestVisualizer : MonoBehaviour
             case Ejercicio.Nueve: //Es reflect pero a veces funca y otras no
 
                 vectorResult = Vec3.Reflect(vectorA, vectorB);
-
+                
                 break;
             case Ejercicio.Diez: 
 
