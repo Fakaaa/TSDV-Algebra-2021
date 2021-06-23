@@ -247,11 +247,6 @@ namespace CustomMath
         {
             return x == other.x && y == other.y && z == other.z;
         }
-
-        public override int GetHashCode()
-        {
-            return x.GetHashCode() ^ (y.GetHashCode() << 2) ^ (z.GetHashCode() >> 2);
-        }
         #endregion
     }
 }

@@ -4,17 +4,6 @@ using UnityEngine;
 namespace CustomMath
 {
     [Serializable]
-    public class InvalidIndex : Exception
-    {
-        public InvalidIndex() { }
-        public InvalidIndex(string message) : base(message) { }
-        public InvalidIndex(string message, Exception inner) : base(message, inner) { }
-        protected InvalidIndex(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
-    }
-
-    [Serializable]
     public struct Mat4X4 : IEquatable<Mat4X4>
     {
         public float m00;
@@ -58,7 +47,8 @@ namespace CustomMath
             }
             else
             {
-                throw new InvalidIndex("Index out of range!");
+                Debug.LogError("Invalid index: Out of range");
+                return Vector4.zero;
             }
         }
         public Vector4 GetRow(int index)
@@ -85,7 +75,8 @@ namespace CustomMath
             }
             else
             {
-                throw new InvalidIndex("Index out of range!");
+                Debug.LogError("Invalid index: Out of range");
+                return Vector4.zero;
             }
         }
         public static Mat4X4 identity
@@ -95,7 +86,13 @@ namespace CustomMath
                 return new Mat4X4(new Vector4(1, 0, 0, 0), new Vector4(0, 1, 0, 0), new Vector4(0, 0, 1, 0), new Vector4(0, 0, 0, 1));
             }
         }
-
+        public static Mat4X4 zero
+        {
+            get
+            {
+                return new Mat4X4(new Vector4(0, 0, 0, 0), new Vector4(0, 0, 0, 0), new Vector4(0, 0, 0, 0), new Vector4(0, 0, 0, 0));
+            }
+        }
         public Mat4X4(Vector4 column0, Vector4 column1, Vector4 column2, Vector4 column3)
         {
             //X
@@ -118,6 +115,27 @@ namespace CustomMath
             m31 = column1.w;    //      |30, 31, 32, 33 | - 3
             m32 = column2.w;
             m33 = column3.w;
+        }
+        public static Mat4X4 Translate(Vector3  vec)
+        {
+            Mat4X4 matTrans = identity;
+
+            Vector4 vecTranslate = new Vector4(vec.x + matTrans.m03, vec.y + matTrans.m13, vec.z + matTrans.m23, 1);
+
+            matTrans.m03 = vecTranslate.x;
+            matTrans.m13 = vecTranslate.y;
+            matTrans.m23 = vecTranslate.z;
+            matTrans.m33 = vecTranslate.w;
+
+            return matTrans;
+        }
+        public Mat4X4 transpose
+        {
+            get
+            {
+                Mat4X4 matT = new Mat4X4(new Vector4(m00, m01, m02, m03), new Vector4(m10, m11, m12, m13), new Vector4(m20, m21, m22, m23), new Vector4(m30, m31, m32, m33));
+                return matT;
+            }
         }
         #region Internals
         public override bool Equals(object other)
