@@ -129,10 +129,24 @@ namespace CustomMath
 
             return matTrans;
         }
+        public static Mat4X4 Scale(Vector3 vec)
+        {
+            Mat4X4 matScale = identity;
+
+            Vector4 vecTranslate = new Vector4(vec.x * matScale.m00, vec.y * matScale.m11, vec.z * matScale.m22, 1);
+
+            matScale.m00 = vecTranslate.x;
+            matScale.m11 = vecTranslate.y;
+            matScale.m22 = vecTranslate.z;
+            matScale.m33 = vecTranslate.w;
+
+            return matScale;
+        }
         public Mat4X4 transpose
         {
             get
             {
+                //Columns where rows and rows where columns
                 Mat4X4 matT = new Mat4X4(new Vector4(m00, m01, m02, m03), new Vector4(m10, m11, m12, m13), new Vector4(m20, m21, m22, m23), new Vector4(m30, m31, m32, m33));
                 return matT;
             }

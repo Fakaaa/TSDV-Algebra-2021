@@ -6,20 +6,34 @@ public class MyMatrix4X4 : MonoBehaviour
     [SerializeField] GameObject cube;
     void Start()
     {
-        Matrix4x4 unityMat = Matrix4x4.Translate(cube.transform.position);
-        Mat4X4 myMat = Mat4X4.Translate(cube.transform.position);
+        Matrix4x4 unityMatTranslate = Matrix4x4.Translate(cube.transform.position);
+        Mat4X4 myMatTranslate = Mat4X4.Translate(cube.transform.position);
+        Matrix4x4 unityMatScale = Matrix4x4.Scale(cube.transform.localScale);
+        Mat4X4 myMatSacale = Mat4X4.Scale(cube.transform.localScale);
 
+        //----------------------------
+        #region TRANSLATE TEST
+        //Debug.Log("Unity Matrix");
+        //DebugMatrix(unityMatTranslate);
+        //Debug.Log("----------------------------------");
+        //unityMatTranslate = unityMatTranslate.transpose;
+        //DebugMatrix(unityMatTranslate);
+        //Debug.Log("==================================");
+        //Debug.Log("My Matrix");
+        //DebugMatrix(myMatTranslate);
+        //Debug.Log("----------------------------------");
+        //myMatTranslate = myMatTranslate.transpose;
+        //DebugMatrix(myMatTranslate);
+        #endregion
+        //----------------------------
+        #region SCALE TEST
         Debug.Log("Unity Matrix");
-        DebugMatrix(unityMat);
-        Debug.Log("----------------------------------");
-        unityMat = unityMat.transpose;
-        DebugMatrix(unityMat);
+        DebugMatrix(unityMatScale);
         Debug.Log("==================================");
         Debug.Log("My Matrix");
-        DebugMatrix(myMat);
-        Debug.Log("----------------------------------");
-        myMat = myMat.transpose;
-        DebugMatrix(myMat);
+        DebugMatrix(myMatSacale);
+        #endregion
+        //----------------------------
     }
 
     public void DebugMatrix(Matrix4x4 mat)
