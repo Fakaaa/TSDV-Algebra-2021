@@ -30,6 +30,8 @@ public class TestMyPlane : MonoBehaviour
         //Facu plains
         myPlane3Points = new myPlane(pointA, pointB, pointC);
         myPlaneNormPoint = new myPlane(Vec3.Forward, pointA);
+
+        Matrix4x4 aka;
     }
 
     void Update()
