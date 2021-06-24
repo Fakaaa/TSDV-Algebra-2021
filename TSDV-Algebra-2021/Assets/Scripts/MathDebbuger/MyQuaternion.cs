@@ -77,9 +77,9 @@ namespace CustomMath
 
 
             float rowRealResult = (awXbw - axXbx - ayXby - azXbz);//* w 
-            float rowIResult = (awXbx + axXbw + ayXbz - azXby);//* i
-            float rowJResult = (awXby - axXbz + ayXbw + azXbx);//* j
-            float rowKResult = (awXbz + axXby - ayXbx + azXbw);//* k
+            float rowIResult = (awXbx + axXbw + ayXbz - azXby);   //* i
+            float rowJResult = (awXby - axXbz + ayXbw + azXbx);   //* j
+            float rowKResult = (awXbz + axXby - ayXbx + azXbw);   //* k
 
             return new MyQuaternion(rowIResult, rowJResult, rowKResult, rowRealResult);
         }
