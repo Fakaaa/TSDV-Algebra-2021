@@ -322,6 +322,15 @@ namespace CustomMath
 
             return matResult;
         }
+        public static Vector4 operator *(Mat4X4 mat, Vector4 vector)
+        {
+            float x = Vector4.Dot(mat.GetRow(0), vector);
+            float y = Vector4.Dot(mat.GetRow(1), vector);
+            float z = Vector4.Dot(mat.GetRow(2), vector);
+            float w = Vector4.Dot(mat.GetRow(3), vector);
+
+            return new Vector4(x,y,z,w);
+        }
         #region Internals
         public override bool Equals(object other)
         {

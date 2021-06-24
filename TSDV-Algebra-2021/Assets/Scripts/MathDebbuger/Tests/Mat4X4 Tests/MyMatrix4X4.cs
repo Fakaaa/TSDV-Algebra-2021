@@ -70,6 +70,16 @@ public class MyMatrix4X4 : MonoBehaviour
         //Debug.Log(myMat[7]);
         #endregion
         //----------------------------
+        #region TEST MAT X VEC4
+        Matrix4x4 unityMat = Matrix4x4.Translate(cube2.transform.position);
+        Mat4X4 myMat = Mat4X4.Translate(cube2.transform.position);
+        Vector4 resultUnityMatPerVec = unityMat * new Vector4(2,5,2,1);
+        Vector4 resultMyMatPerVec = myMat * new Vector4(2,5,2,1);
+        Debug.Log("Unity Vec4 result: " + resultUnityMatPerVec.ToString());
+        Debug.Log("======================================================");
+        Debug.Log("My Vec4 result: " + resultMyMatPerVec.ToString());
+        #endregion
+        //----------------------------
     }
 
 
