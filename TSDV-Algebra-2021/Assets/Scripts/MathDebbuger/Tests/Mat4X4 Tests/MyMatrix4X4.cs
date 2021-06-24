@@ -8,6 +8,16 @@ public class MyMatrix4X4 : MonoBehaviour
     void Start()
     {
         //----------------------------
+        #region TEST GETER []
+        //Matrix4x4 unityMat = Matrix4x4.identity;
+        //Mat4X4 myMat = Mat4X4.identity;
+        //Debug.Log("Unity Matrix");
+        //Debug.Log(unityMat[7]);
+        //Debug.Log("==================================");
+        //Debug.Log("My Matrix");
+        //Debug.Log(myMat[7]);
+        #endregion
+        //----------------------------
         #region TRANSLATE TEST
         //Matrix4x4 unityMatTranslate = Matrix4x4.Translate(cube.transform.position);
         //Mat4X4 myMatTranslate = Mat4X4.Translate(cube.transform.position);
@@ -60,24 +70,34 @@ public class MyMatrix4X4 : MonoBehaviour
         //DebugMatrix(myResultC);
         #endregion
         //----------------------------
-        #region TEST GETER []
-        //Matrix4x4 unityMat = Matrix4x4.identity;
-        //Mat4X4 myMat = Mat4X4.identity;
-        //Debug.Log("Unity Matrix");
-        //Debug.Log(unityMat[7]);
-        //Debug.Log("==================================");
-        //Debug.Log("My Matrix");
-        //Debug.Log(myMat[7]);
+        #region TEST MAT X VEC4
+        //Matrix4x4 unityMat = Matrix4x4.Translate(cube2.transform.position);
+        //Mat4X4 myMat = Mat4X4.Translate(cube2.transform.position);
+        //Vector4 resultUnityMatPerVec = unityMat * new Vector4(2,5,2,1);
+        //Vector4 resultMyMatPerVec = myMat * new Vector4(2,5,2,1);
+        //Debug.Log("Unity Vec4 result: " + resultUnityMatPerVec.ToString());
+        //Debug.Log("======================================================");
+        //Debug.Log("My Vec4 result: " + resultMyMatPerVec.ToString());
         #endregion
         //----------------------------
-        #region TEST MAT X VEC4
-        Matrix4x4 unityMat = Matrix4x4.Translate(cube2.transform.position);
-        Mat4X4 myMat = Mat4X4.Translate(cube2.transform.position);
-        Vector4 resultUnityMatPerVec = unityMat * new Vector4(2,5,2,1);
-        Vector4 resultMyMatPerVec = myMat * new Vector4(2,5,2,1);
-        Debug.Log("Unity Vec4 result: " + resultUnityMatPerVec.ToString());
-        Debug.Log("======================================================");
-        Debug.Log("My Vec4 result: " + resultMyMatPerVec.ToString());
+        #region TEST GET QUAT FROM MAT
+        //Matrix4x4 a = Matrix4x4.Rotate(cube2.transform.rotation);
+        //Mat4X4 b = Mat4X4.Rotate(cube2.transform.rotation);
+        //Quaternion q1 = a.rotation;
+        //Quaternion q2 = b.rotation;
+        //Debug.Log("Unity result quat from mat" + q1.ToString());
+        //Debug.Log("==========================================");
+        //Debug.Log("My result quat from mat" + q2.ToString());
+        #endregion
+        //----------------------------
+        #region TEST LOSSY SCALE MAT
+        Matrix4x4 unityMat = Matrix4x4.Scale(cube.transform.lossyScale);
+        Vector3 losssyScaleUnityMat = unityMat.lossyScale;
+        Debug.Log("Unity lossyScale from mat" + losssyScaleUnityMat.ToString());
+        Debug.Log("==========================================");
+        Mat4X4 myMat = Mat4X4.Scale(cube.transform.lossyScale);
+        Vector3 losssyScaleMyMat = myMat.lossyScale;
+        Debug.Log("My lossyScale from mat" + losssyScaleMyMat.ToString());
         #endregion
         //----------------------------
     }

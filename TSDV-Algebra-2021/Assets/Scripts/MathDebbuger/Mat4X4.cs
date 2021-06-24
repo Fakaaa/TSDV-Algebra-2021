@@ -30,37 +30,53 @@ namespace CustomMath
                 float val = -1;
                 switch (index)
                 {
-                    case 0: val = m00;
+                    case 0:
+                        val = m00;
                         break;
-                    case 1: val = m10;
+                    case 1:
+                        val = m10;
                         break;
-                    case 2: val = m20;
+                    case 2:
+                        val = m20;
                         break;
-                    case 3: val = m30;
+                    case 3:
+                        val = m30;
                         break;
-                    case 4: val = m01;
+                    case 4:
+                        val = m01;
                         break;
-                    case 5: val = m11;
+                    case 5:
+                        val = m11;
                         break;
-                    case 6: val = m21;
+                    case 6:
+                        val = m21;
                         break;
-                    case 7: val = m31;
+                    case 7:
+                        val = m31;
                         break;
-                    case 8: val = m02;
+                    case 8:
+                        val = m02;
                         break;
-                    case 9: val = m12;
+                    case 9:
+                        val = m12;
                         break;
-                    case 10: val = m22;
+                    case 10:
+                        val = m22;
                         break;
-                    case 11: val = m32;
+                    case 11:
+                        val = m32;
                         break;
-                    case 12: val = m03;
+                    case 12:
+                        val = m03;
                         break;
-                    case 13: val = m13;
+                    case 13:
+                        val = m13;
                         break;
-                    case 14: val = m23;
+                    case 14:
+                        val = m23;
                         break;
-                    case 15: val = m33;
+                    case 15:
+                        val = m33;
                         break;
                 }
                 if (val == -1)
@@ -90,6 +106,59 @@ namespace CustomMath
                 //Columns where rows and rows where columns
                 Mat4X4 matT = new Mat4X4(new Vector4(m00, m01, m02, m03), new Vector4(m10, m11, m12, m13), new Vector4(m20, m21, m22, m23), new Vector4(m30, m31, m32, m33));
                 return matT;
+            }
+        }
+        public Quaternion rotation
+        {
+            get
+            {
+                float diagonal = m00 + m11 + m22;
+                float qw = 0;
+                float qx = 0;
+                float qy = 0;
+                float qz = 0;
+
+                if(diagonal > 0)
+                {
+                    float wComponent = Mathf.Sqrt(diagonal + 1.0f) * 2;
+                    qw = 0.25f * wComponent;
+                    qx = (m21 - m12) / wComponent;
+                    qy = (m02 - m20) / wComponent;
+                    qz = (m10 - m01) / wComponent;
+                }
+                else if((m00 > m11) && (m00 > m22))
+                {
+                    float wComponent = Mathf.Sqrt(1.0f + m00 - m11 - m22) * 2;
+                    qw = (m21 - m12) / wComponent;
+                    qx = 0.25f * wComponent;
+                    qy = (m01 + m10) / wComponent;
+                    qz = (m02 + m20) / wComponent;
+                }
+                else if ((m11 > m22))
+                {
+                    float wComponent = Mathf.Sqrt(1.0f + m11 - m00 - m22) * 2;
+                    qw = (m02 - m20) / wComponent;
+                    qx = (m01 + m10) / wComponent;
+                    qy = 0.25f * wComponent;
+                    qz = (m12 + m21) / wComponent;
+                }
+                else
+                {
+                    float wComponent = Mathf.Sqrt(1.0f + m22 - m00 - m11) * 2;
+                    qw = (m10 - m01) / wComponent;
+                    qx = (m02 + m20) / wComponent;
+                    qy = (m12 + m21) / wComponent;
+                    qz = 0.25f * wComponent;
+                }
+
+                return new Quaternion(qx, qy, qz, qw);
+            }
+        }
+        public Vector3 lossyScale
+        {
+            get
+            {
+                return new Vector3(m00, m11, m22);
             }
         }
         public Mat4X4(Vector4 column0, Vector4 column1, Vector4 column2, Vector4 column3)
@@ -329,7 +398,7 @@ namespace CustomMath
             float z = Vector4.Dot(mat.GetRow(2), vector);
             float w = Vector4.Dot(mat.GetRow(3), vector);
 
-            return new Vector4(x,y,z,w);
+            return new Vector4(x, y, z, w);
         }
         #region Internals
         public override bool Equals(object other)
