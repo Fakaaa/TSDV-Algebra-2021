@@ -16,12 +16,59 @@ namespace CustomMath
         public float m13; //|10, 11, 12, 13 | - 1 Rows
         public float m20; //|20, 21, 22, 23 | - 2
         public float m21; //|30, 31, 32, 33 | - 3
-        public float m22; 
+        public float m22;
         public float m23;
         public float m30;
         public float m31;
         public float m32;
         public float m33;
+
+        public float this[int index]
+        {
+            get
+            {
+                float val = -1;
+                switch (index)
+                {
+                    case 0: val = m00;
+                        break;
+                    case 1: val = m10;
+                        break;
+                    case 2: val = m20;
+                        break;
+                    case 3: val = m30;
+                        break;
+                    case 4: val = m01;
+                        break;
+                    case 5: val = m11;
+                        break;
+                    case 6: val = m21;
+                        break;
+                    case 7: val = m31;
+                        break;
+                    case 8: val = m02;
+                        break;
+                    case 9: val = m12;
+                        break;
+                    case 10: val = m22;
+                        break;
+                    case 11: val = m32;
+                        break;
+                    case 12: val = m03;
+                        break;
+                    case 13: val = m13;
+                        break;
+                    case 14: val = m23;
+                        break;
+                    case 15: val = m33;
+                        break;
+                }
+                if (val == -1)
+                    throw new IndexOutOfRangeException("Invalid index");
+
+                return val;
+            }
+        }
         public static Mat4X4 identity
         {
             get
@@ -48,14 +95,14 @@ namespace CustomMath
         public Mat4X4(Vector4 column0, Vector4 column1, Vector4 column2, Vector4 column3)
         {
             //X
-            m00 = column0.x; 
-            m01 = column1.x; 
-            m02 = column2.x; 
-            m03 = column3.x; 
+            m00 = column0.x;
+            m01 = column1.x;
+            m02 = column2.x;
+            m03 = column3.x;
             //Y
-            m10 = column0.y; 
-            m11 = column1.y; 
-            m12 = column2.y; 
+            m10 = column0.y;
+            m11 = column1.y;
+            m12 = column2.y;
             m13 = column3.y;
             //Z
             m20 = column0.z;    //       Columns
@@ -70,7 +117,7 @@ namespace CustomMath
         }
         public Vector4 GetColumn(int index)
         {
-            if(index >= 0 && index <= 3)
+            if (index >= 0 && index <= 3)
             {
                 Vector4 column = Vector4.zero;
                 switch (index)
@@ -130,20 +177,24 @@ namespace CustomMath
             {
                 switch (index)
                 {
-                    case 0: m00 = row.x; m01 = row.y; m02 = row.z; m03 = row.w;
+                    case 0:
+                        m00 = row.x; m01 = row.y; m02 = row.z; m03 = row.w;
                         break;
-                    case 1: m10 = row.x; m11 = row.y; m12 = row.z; m13 = row.w;
+                    case 1:
+                        m10 = row.x; m11 = row.y; m12 = row.z; m13 = row.w;
                         break;
-                    case 2: m20 = row.x; m21 = row.y; m22 = row.z; m23 = row.w;
+                    case 2:
+                        m20 = row.x; m21 = row.y; m22 = row.z; m23 = row.w;
                         break;
-                    case 3: m30 = row.x; m31 = row.y; m32 = row.z; m33 = row.w;
+                    case 3:
+                        m30 = row.x; m31 = row.y; m32 = row.z; m33 = row.w;
                         break;
                 }
             }
             else
             {
                 Debug.LogError("Error: index out of range.");
-            }    
+            }
         }
         public void SetColumn(int index, Vector4 column)
         {
@@ -170,7 +221,7 @@ namespace CustomMath
                 Debug.LogError("Error: index out of range.");
             }
         }
-        public static Mat4X4 Translate(Vector3  vec)
+        public static Mat4X4 Translate(Vector3 vec)
         {
             Mat4X4 matTrans = identity;
 
@@ -196,22 +247,49 @@ namespace CustomMath
 
             return matScale;
         }
-        public static Mat4X4 Rotate(Quaternion a)
+        public static Mat4X4 Rotate(Quaternion q)
         {
-            Mat4X4 matRot = identity;
+            /*
+            Mat4X4 mat = identity;
+            Quaternion rotX = new Quaternion(a.x,
+                                            (Mathf.Cos(mat.m11) * a.y - Mathf.Sin(mat.m12) * a.z),
+                                            (Mathf.Sin(mat.m21) * a.y + Mathf.Cos(mat.m22) * a.z), 1);
+            
+            Quaternion rotY = new Quaternion((Mathf.Cos(mat.m00)* a.x + Mathf.Sin(mat.m02) * a.z), a.y,
+                                            (-Mathf.Sin(mat.m02)* a.x + Mathf.Cos(mat.m22)* a.z), 1);
 
-            float xRotation = (Mathf.Cos(matRot.m11) * a.y)-(Mathf.Sin(matRot.m12)*a.z);
+            Quaternion rotZ = new Quaternion((Mathf.Cos(mat.m00)* a.x - Mathf.Sin(mat.m01)*a.y), 
+                                             (Mathf.Sin(mat.m10)* a.x + Mathf.Cos(mat.m11)*a.y),a.z,1);
 
-            Quaternion quatRot = new Quaternion(xRotation , a.y * matRot.m11, a.z * matRot.m22, 1);
 
-            matRot.m00 = quatRot.x;
-            matRot.m11 = quatRot.y;
-            matRot.m22 = quatRot.z;
-            matRot.m33 = quatRot.w;
+            Vector4 rotXVec = new Vector4(rotX.x, rotX.y, rotX.z, rotX.w); 
+            Vector4 rotYVec = new Vector4(rotY.x, rotY.y, rotY.z, rotY.w); 
+            Vector4 rotZVec = new Vector4(rotZ.x, rotZ.y, rotZ.z, rotZ.w); 
+            mat.SetRow(0, rotXVec);
+            mat.SetRow(1, rotYVec);
+            mat.SetRow(2, rotZVec);
+            mat.SetRow(3, new Vector4(0,0,0,1));
 
-            return matRot;
+            return mat;
+             */
+
+            //Magia pura :/
+
+            Mat4X4 mat = identity;
+            mat.m02 = 2.0f * (q.x * q.z) + 2.0f * (q.y * q.w);
+            mat.m12 = 2.0f * (q.y * q.z) - 2.0f * (q.x * q.w);
+            mat.m22 = 1 - 2.0f * (q.x * q.x) - 2.0f * (q.y * q.y);
+
+            mat.m00 = 1 - 2.0f * (q.y * q.y) - 2.0f * (q.z * q.z);
+            mat.m10 = 2.0f * (q.x * q.y) + 2.0f * (q.z * q.w);
+            mat.m20 = 2.0f * (q.x * q.z) - 2.0f * (q.y * q.w);
+
+            mat.m01 = 2.0f * (q.x * q.y) - 2.0f * (q.z * q.w);
+            mat.m11 = 1 - 2.0f * (q.x * q.x) - 2.0f * (q.z * q.z);
+            mat.m21 = 2.0f * (q.y * q.z) + 2.0f * (q.x * q.w);
+            return mat;
         }
-        
+
         public static Mat4X4 operator *(Mat4X4 mat1, Mat4X4 mat2)
         {
             Mat4X4 matResult = identity;

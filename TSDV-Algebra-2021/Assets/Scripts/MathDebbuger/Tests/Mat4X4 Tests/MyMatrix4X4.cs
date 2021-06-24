@@ -7,13 +7,6 @@ public class MyMatrix4X4 : MonoBehaviour
     [SerializeField] GameObject cube2;
     void Start()
     {
-        Matrix4x4 unityA = Matrix4x4.Translate(cube.transform.position);
-        Matrix4x4 unityB = Matrix4x4.Translate(cube2.transform.position);
-        Matrix4x4 resultMatUnity = Matrix4x4.identity;
-        Mat4X4 myA = Mat4X4.Translate(cube.transform.position);
-        Mat4X4 myB = Mat4X4.Translate(cube2.transform.position);
-        Mat4X4 myResultC = Mat4X4.identity;
-
         //----------------------------
         #region TRANSLATE TEST
         //Matrix4x4 unityMatTranslate = Matrix4x4.Translate(cube.transform.position);
@@ -43,16 +36,38 @@ public class MyMatrix4X4 : MonoBehaviour
         //----------------------------
         #region ROTATE TEST
         //Matrix4x4 unityMatRotation = Matrix4x4.Rotate(cube.transform.rotation);
+        //Mat4X4 myMatRotation = Mat4X4.Rotate(cube.transform.rotation);
+        //Debug.Log("Unity Matrix");
+        //DebugMatrix(unityMatRotation);
+        //Debug.Log("==================================");
+        //Debug.Log("My Matrix");
+        //DebugMatrix(myMatRotation);
         #endregion
         //----------------------------
         #region PRODUCT MATRIX
-        Debug.Log("Unity Matrix");
-        resultMatUnity = unityA * unityB;
-        DebugMatrix(resultMatUnity);
-        Debug.Log("==================================");
-        Debug.Log("My Matrix");
-        myResultC = myA * myB;
-        DebugMatrix(myResultC);
+        //Matrix4x4 unityA = Matrix4x4.Translate(cube.transform.position);
+        //Matrix4x4 unityB = Matrix4x4.Translate(cube2.transform.position);
+        //Matrix4x4 resultMatUnity = Matrix4x4.identity;
+        //Mat4X4 myA = Mat4X4.Translate(cube.transform.position);
+        //Mat4X4 myB = Mat4X4.Translate(cube2.transform.position);
+        //Mat4X4 myResultC = Mat4X4.identity;
+        //Debug.Log("Unity Matrix");
+        //resultMatUnity = unityA * unityB;
+        //DebugMatrix(resultMatUnity);
+        //Debug.Log("==================================");
+        //Debug.Log("My Matrix");
+        //myResultC = myA * myB;
+        //DebugMatrix(myResultC);
+        #endregion
+        //----------------------------
+        #region TEST GETER []
+        //Matrix4x4 unityMat = Matrix4x4.identity;
+        //Mat4X4 myMat = Mat4X4.identity;
+        //Debug.Log("Unity Matrix");
+        //Debug.Log(unityMat[7]);
+        //Debug.Log("==================================");
+        //Debug.Log("My Matrix");
+        //Debug.Log(myMat[7]);
         #endregion
         //----------------------------
     }
