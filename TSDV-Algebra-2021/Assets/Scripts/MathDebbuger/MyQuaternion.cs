@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace CustomMath
 {
@@ -47,6 +48,17 @@ namespace CustomMath
 
             return 0.0f; // ?
         }
+        public static MyQuaternion Normalize(MyQuaternion quat)
+        {
+            float mag = Mathf.Sqrt(quat.x * quat.x + quat.y * quat.y + quat.z * quat.z + quat.w * quat.w);
+
+            quat.x /= mag;
+            quat.y /= mag;
+            quat.z /= mag;
+            quat.w /= mag;
+
+            return new MyQuaternion(quat.x,quat.y,quat.z,quat.w);
+        }
         public static MyQuaternion operator *(MyQuaternion a, MyQuaternion b)
         {
             #region Rules
@@ -87,7 +99,6 @@ namespace CustomMath
         {
             return "X = " + x.ToString() + "   Y = " + y.ToString() + "   Z = " + z.ToString() + "   W = " + w.ToString();
         }
-
         #region Internals
         public override bool Equals(object other)
         {

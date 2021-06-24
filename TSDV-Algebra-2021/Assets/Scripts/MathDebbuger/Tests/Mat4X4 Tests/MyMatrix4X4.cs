@@ -91,13 +91,13 @@ public class MyMatrix4X4 : MonoBehaviour
         #endregion
         //----------------------------
         #region TEST LOSSY SCALE MAT
-        Matrix4x4 unityMat = Matrix4x4.Scale(cube.transform.lossyScale);
-        Vector3 losssyScaleUnityMat = unityMat.lossyScale;
-        Debug.Log("Unity lossyScale from mat" + losssyScaleUnityMat.ToString());
-        Debug.Log("==========================================");
-        Mat4X4 myMat = Mat4X4.Scale(cube.transform.lossyScale);
-        Vector3 losssyScaleMyMat = myMat.lossyScale;
-        Debug.Log("My lossyScale from mat" + losssyScaleMyMat.ToString());
+        //Matrix4x4 unityMat = Matrix4x4.Scale(cube.transform.lossyScale);
+        //Vector3 losssyScaleUnityMat = unityMat.lossyScale;
+        //Debug.Log("Unity lossyScale from mat" + losssyScaleUnityMat.ToString());
+        //Debug.Log("==========================================");
+        //Mat4X4 myMat = Mat4X4.Scale(cube.transform.lossyScale);
+        //Vector3 losssyScaleMyMat = myMat.lossyScale;
+        //Debug.Log("My lossyScale from mat" + losssyScaleMyMat.ToString());
         #endregion
         //----------------------------
     }

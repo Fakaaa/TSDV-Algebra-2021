@@ -414,10 +414,6 @@ namespace CustomMath
             else
                 return false;
         }
-        public override int GetHashCode()
-        {
-            return GetColumn(0).GetHashCode() ^ (GetColumn(1).GetHashCode() << 2) ^ (GetColumn(2).GetHashCode() >> 2);
-        }
         #endregion
     }
 }
