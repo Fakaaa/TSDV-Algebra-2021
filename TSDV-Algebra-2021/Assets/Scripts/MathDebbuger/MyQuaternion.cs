@@ -98,11 +98,6 @@ namespace CustomMath
         {
             return x == other.x && y == other.y && z == other.z && w == other.w;
         }
-
-        public override int GetHashCode()
-        {
-            return 0;
-        }
         #endregion
     }
 }
