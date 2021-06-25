@@ -32,6 +32,11 @@ namespace CustomMath
             this.x = quat.x; this.y = quat.y;
             this.z = quat.z; this.w = quat.w;
         }
+        public MyQuaternion(MyQuaternion quat)
+        {
+            this.x = quat.x; this.y = quat.y;
+            this.z = quat.z; this.w = quat.w;
+        }
         public void Set(float x, float y, float z, float w)
         {
             this.x = x; this.y = y;
@@ -44,29 +49,56 @@ namespace CustomMath
                 return identityQuat;
             }
         }
+        public static MyQuaternion Euler(Vec3 euler)
+        {
+            MyQuaternion qX = identity;
+            MyQuaternion qY = identity;
+            MyQuaternion qZ = identity;
+
+            float sin = Mathf.Sin(Mathf.Deg2Rad * euler.x * 0.5f);
+            float cos = Mathf.Cos(Mathf.Deg2Rad * euler.x * 0.5f);
+            qX.Set(sin, 0.0f, 0.0f, cos);
+
+            sin = Mathf.Sin(Mathf.Deg2Rad * euler.y * 0.5f);
+            cos = Mathf.Cos(Mathf.Deg2Rad * euler.y * 0.5f);
+            qY.Set(0.0f, sin, 0.0f, cos);
+
+            sin = Mathf.Sin(Mathf.Deg2Rad * euler.z * 0.5f);
+            cos = Mathf.Cos(Mathf.Deg2Rad * euler.z * 0.5f);
+            qZ.Set(0.0f, 0.0f, sin, cos);
+
+            return new MyQuaternion(qX * qY * qZ);
+        }
         public static float Dot(MyQuaternion a, MyQuaternion b)
         {
             return (a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w);
         }
-        public float Angle(MyQuaternion a, MyQuaternion b)
+        public static float Angle(MyQuaternion a, MyQuaternion b)
         {
-            float dotProduct = Dot(a, b);
+            MyQuaternion inverA = Inverse(a);
+            MyQuaternion calc = b * inverA;
 
-            return 0.0f; // ?
+            float angle = Mathf.Acos(calc.w) * 2.0f * Mathf.Rad2Deg;
+            return angle;
         }
         public static MyQuaternion Slerp(MyQuaternion a, MyQuaternion b, float t)
+        {
+            Mathf.Clamp(t, 0, 1f);
+            return SlerpUnclamped(a,b,t);
+        }
+        public static MyQuaternion SlerpUnclamped(MyQuaternion a, MyQuaternion b, float t)
         {
             MyQuaternion quatInterpolated = identity;
 
             float cosHalfTheta = Dot(a, b);
-            if(Mathf.Abs(cosHalfTheta)>= 1f)
+            if (Mathf.Abs(cosHalfTheta) >= 1f)
             {
                 quatInterpolated.Set(a.x, a.y, a.z, a.w);
                 return quatInterpolated;
             }
             float halfTheta = Mathf.Acos(cosHalfTheta);
-            float sinHalfTheta = Mathf.Sqrt(1- cosHalfTheta * cosHalfTheta);
-            if(Mathf.Abs(sinHalfTheta) < 0.001f)
+            float sinHalfTheta = Mathf.Sqrt(1 - cosHalfTheta * cosHalfTheta);
+            if (Mathf.Abs(sinHalfTheta) < 0.001f)
             {
                 quatInterpolated.w = (a.w * 0.5f + b.w * 0.5f);
                 quatInterpolated.x = (a.x * 0.5f + b.x * 0.5f);
@@ -92,6 +124,30 @@ namespace CustomMath
             quat.w /= mag;
 
             return new MyQuaternion(quat.x,quat.y,quat.z,quat.w);
+        }
+        public static MyQuaternion Inverse(MyQuaternion quat)
+        {
+            return new MyQuaternion(-quat.x, -quat.y, -quat.z, quat.w);
+        }
+        public static Vec3 operator*(MyQuaternion rotation, Vec3 point)
+        {
+            float num = rotation.x * 2f;
+            float num2 = rotation.y * 2f;
+            float num3 = rotation.z * 2f;
+            float num4 = rotation.x * num;
+            float num5 = rotation.y * num2;
+            float num6 = rotation.z * num3;
+            float num7 = rotation.x * num2;
+            float num8 = rotation.x * num3;
+            float num9 = rotation.y * num3;
+            float num10 = rotation.w * num;
+            float num11 = rotation.w * num2;
+            float num12 = rotation.w * num3;
+            Vec3 result;
+            result.x = (1f - (num5 + num6)) * point.x + (num7 - num12) * point.y + (num8 + num11) * point.z;
+            result.y = (num7 + num12) * point.x + (1f - (num4 + num6)) * point.y + (num9 - num10) * point.z;
+            result.z = (num8 - num11) * point.x + (num9 + num10) * point.y + (1f - (num4 + num5)) * point.z;
+            return result;
         }
         public static MyQuaternion operator *(MyQuaternion a, MyQuaternion b)
         {

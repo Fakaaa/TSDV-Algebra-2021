@@ -184,6 +184,10 @@ namespace CustomMath
             m32 = column2.w;
             m33 = column3.w;
         }
+        public void Inverse()
+        {
+
+        }
         public Vector4 GetColumn(int index)
         {
             if (index >= 0 && index <= 3)
@@ -358,7 +362,6 @@ namespace CustomMath
             mat.m21 = 2.0f * (q.y * q.z) + 2.0f * (q.x * q.w);
             return mat;
         }
-
         public static Mat4X4 operator *(Mat4X4 mat1, Mat4X4 mat2)
         {
             Mat4X4 matResult = identity;

@@ -13,7 +13,7 @@ public class CubeSlerp : MonoBehaviour
         
         //MIO
         MyQuaternion transformCube = new MyQuaternion(transform.rotation);
-        transformCube = MyQuaternion.Slerp(transformCube,new MyQuaternion(sphere.transform.rotation), speedRotate);
+        transformCube = MyQuaternion.SlerpUnclamped(transformCube,new MyQuaternion(sphere.transform.rotation), timer *  speedRotate);
         transform.rotation = new Quaternion(transformCube.x, transformCube.y, transformCube.z, transformCube.w);
         Debug.Log(transform.rotation);
 

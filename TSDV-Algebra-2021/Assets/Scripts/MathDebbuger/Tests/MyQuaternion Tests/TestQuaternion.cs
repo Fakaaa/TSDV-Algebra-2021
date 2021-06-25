@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using CustomMath;
+using EjerciciosAlgebra;
 
 public class TestQuaternion : MonoBehaviour
 {
@@ -16,9 +17,10 @@ public class TestQuaternion : MonoBehaviour
         myQuaternion = new MyQuaternion(3, 5, 0, 1);
         myQuaternion2 = new MyQuaternion(1, 0, 0, 1);
 
-        Debug.Log("Unity quaternion:" + Quaternion.Normalize(unityQuaternion).ToString());
-        Debug.Log("My quaternion:" + MyQuaternion.Normalize(myQuaternion).ToString());
+
+        Debug.Log("Unity quaternion:" + Quaternion.Angle(unityQuaternion, unityQuaternion2).ToString());
         Debug.Log("--------------------------------");
+        Debug.Log("My quaternion:" + MyQuaternion.Angle(myQuaternion, myQuaternion2));
         //Debug.Log("Unity quaternion DOT:" + Quaternion.Dot(unityQuaternion,unityQuaternion2));
         //Debug.Log("My quaternion DOT:" + MyQuaternion.Dot(myQuaternion, myQuaternion2));
         //Debug.Log("--------------------------------");
