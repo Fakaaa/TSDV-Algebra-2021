@@ -18,6 +18,7 @@ namespace CustomMath
         public const float k = 1.0f;
         public const float e = 1.0f;
 
+        public Quaternion convertQuat { get { return new Quaternion(x, y, z, w); } }
         private static MyQuaternion identityQuat = new MyQuaternion(0, 0, 0, 1);
         #endregion
 
@@ -25,6 +26,11 @@ namespace CustomMath
         {
             this.x = x; this.y = y;
             this.z = z; this.w = w;
+        }
+        public MyQuaternion(Quaternion quat)
+        {
+            this.x = quat.x; this.y = quat.y;
+            this.z = quat.z; this.w = quat.w;
         }
         public void Set(float x, float y, float z, float w)
         {
@@ -47,6 +53,34 @@ namespace CustomMath
             float dotProduct = Dot(a, b);
 
             return 0.0f; // ?
+        }
+        public static MyQuaternion Slerp(MyQuaternion a, MyQuaternion b, float t)
+        {
+            MyQuaternion quatInterpolated = identity;
+
+            float cosHalfTheta = Dot(a, b);
+            if(Mathf.Abs(cosHalfTheta)>= 1f)
+            {
+                quatInterpolated.Set(a.x, a.y, a.z, a.w);
+                return quatInterpolated;
+            }
+            float halfTheta = Mathf.Acos(cosHalfTheta);
+            float sinHalfTheta = Mathf.Sqrt(1- cosHalfTheta * cosHalfTheta);
+            if(Mathf.Abs(sinHalfTheta) < 0.001f)
+            {
+                quatInterpolated.w = (a.w * 0.5f + b.w * 0.5f);
+                quatInterpolated.x = (a.x * 0.5f + b.x * 0.5f);
+                quatInterpolated.y = (a.y * 0.5f + b.y * 0.5f);
+                quatInterpolated.z = (a.z * 0.5f + b.z * 0.5f);
+                return quatInterpolated;
+            }
+            float ratioA = Mathf.Sin((1 - t) * halfTheta) / sinHalfTheta;
+            float ratioB = Mathf.Sin(t * halfTheta) / sinHalfTheta;
+            quatInterpolated.w = (a.w * ratioA + b.w * ratioB);
+            quatInterpolated.x = (a.x * ratioA + b.x * ratioB);
+            quatInterpolated.y = (a.y * ratioA + b.y * ratioB);
+            quatInterpolated.z = (a.z * ratioA + b.z * ratioB);
+            return quatInterpolated;
         }
         public static MyQuaternion Normalize(MyQuaternion quat)
         {
