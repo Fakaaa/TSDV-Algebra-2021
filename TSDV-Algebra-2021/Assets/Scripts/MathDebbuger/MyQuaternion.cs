@@ -37,10 +37,12 @@ namespace CustomMath
             this.x = quat.x; this.y = quat.y;
             this.z = quat.z; this.w = quat.w;
         }
-        public void Set(float x, float y, float z, float w)
+        public MyQuaternion normalized
         {
-            this.x = x; this.y = y;
-            this.z = z; this.w = w;
+            get
+            {
+                return Normalize(this);
+            }
         }
         public static MyQuaternion identity
         {
@@ -49,28 +51,22 @@ namespace CustomMath
                 return identityQuat;
             }
         }
-        public MyQuaternion normalized
+        public void Set(float x, float y, float z, float w)
         {
-            get
-            {
-                return Normalize(this);
-            }
+            this.x = x; this.y = y;
+            this.z = z; this.w = w;
         }
         public static MyQuaternion AngleAxis(float angle, Vec3 axis)    //Tiene que estar normalizado el vector
         {
-            angle *= (Mathf.PI / 180) * 0.5f;
+            angle *= Mathf.Deg2Rad * 0.5f;
             axis.Normalize();
+            MyQuaternion resulAngleAxis;
 
-            double axisX = axis.x * Mathf.Sin(angle);
-            double axisY = axis.y * Mathf.Sin(angle);
-            double axisZ = axis.z * Mathf.Sin(angle);
-            float axisW = Mathf.Cos(angle);
+            resulAngleAxis.x = axis.x * Mathf.Sin(angle);
+            resulAngleAxis.y = axis.y * Mathf.Sin(angle);
+            resulAngleAxis.z = axis.z * Mathf.Sin(angle);
+            resulAngleAxis.w = Mathf.Cos(angle);
 
-            axisX = Math.Round(axisX,1,MidpointRounding.AwayFromZero);
-            axisY = Math.Round(axisY,1,MidpointRounding.AwayFromZero);
-            axisZ = Math.Round(axisZ,1,MidpointRounding.AwayFromZero);
-
-            MyQuaternion resulAngleAxis = new MyQuaternion((float)axisX, (float)axisY, (float)axisZ, axisW);
             return resulAngleAxis.normalized;
         }
         public static MyQuaternion Euler(Vec3 euler)
@@ -108,6 +104,28 @@ namespace CustomMath
 
             float angle = Mathf.Acos(calc.w) * 2.0f * Mathf.Rad2Deg;
             return angle;
+        }
+        public static MyQuaternion Lerp(MyQuaternion a, MyQuaternion b, float t)
+        {
+            t = Mathf.Clamp(t, 0, 1);
+            return LerpUnclamped(a,b,t);
+        }
+        public static MyQuaternion LerpUnclamped(MyQuaternion a, MyQuaternion b, float t)
+        {
+            MyQuaternion resultInterpolated = identity;
+
+            if (t >= 1)
+                resultInterpolated = b;
+            else if(t <= 0)
+                resultInterpolated = a;
+            else
+            {
+                MyQuaternion difference = new MyQuaternion(b.x - a.x, b.y - a.y, b.z - a.z, b.w - b.w);
+                MyQuaternion differenceLerped = new MyQuaternion(difference.x * t, difference.y * t, difference.z * t, difference.w * t);
+
+                resultInterpolated = new MyQuaternion(a.x + differenceLerped.x, a.y + differenceLerped.y, a.z + differenceLerped.z, a.w + differenceLerped.w);
+            }
+            return resultInterpolated.normalized;
         }
         public static MyQuaternion Slerp(MyQuaternion a, MyQuaternion b, float t)
         {
