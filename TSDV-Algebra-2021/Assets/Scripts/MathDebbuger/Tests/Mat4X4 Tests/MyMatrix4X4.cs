@@ -100,6 +100,12 @@ public class MyMatrix4X4 : MonoBehaviour
         //Debug.Log("My lossyScale from mat" + losssyScaleMyMat.ToString());
         #endregion
         //----------------------------
+        #region TEST TRS
+        Mat4X4 trsCube = Mat4X4.identity;
+        trsCube.SetTRS(cube.transform.position, cube.transform.rotation, cube.transform.localScale);
+        DebugMatrix(trsCube);
+        #endregion
+        //----------------------------
     }
 
 

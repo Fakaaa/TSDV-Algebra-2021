@@ -49,6 +49,30 @@ namespace CustomMath
                 return identityQuat;
             }
         }
+        public MyQuaternion normalized
+        {
+            get
+            {
+                return Normalize(this);
+            }
+        }
+        public static MyQuaternion AngleAxis(float angle, Vec3 axis)    //Tiene que estar normalizado el vector
+        {
+            angle *= (Mathf.PI / 180) * 0.5f;
+            axis.Normalize();
+
+            double axisX = axis.x * Mathf.Sin(angle);
+            double axisY = axis.y * Mathf.Sin(angle);
+            double axisZ = axis.z * Mathf.Sin(angle);
+            float axisW = Mathf.Cos(angle);
+
+            axisX = Math.Round(axisX,1,MidpointRounding.AwayFromZero);
+            axisY = Math.Round(axisY,1,MidpointRounding.AwayFromZero);
+            axisZ = Math.Round(axisZ,1,MidpointRounding.AwayFromZero);
+
+            MyQuaternion resulAngleAxis = new MyQuaternion((float)axisX, (float)axisY, (float)axisZ, axisW);
+            return resulAngleAxis.normalized;
+        }
         public static MyQuaternion Euler(Vec3 euler)
         {
             MyQuaternion qX = identity;
@@ -68,6 +92,10 @@ namespace CustomMath
             qZ.Set(0.0f, 0.0f, sin, cos);
 
             return new MyQuaternion(qX * qY * qZ);
+        }
+        public MyQuaternion LookRotation(Vec3 direction)
+        {
+            return identity;    //Noup
         }
         public static float Dot(MyQuaternion a, MyQuaternion b)
         {

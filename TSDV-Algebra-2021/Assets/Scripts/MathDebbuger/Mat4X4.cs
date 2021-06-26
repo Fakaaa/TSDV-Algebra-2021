@@ -294,6 +294,14 @@ namespace CustomMath
                 Debug.LogError("Error: index out of range.");
             }
         }
+        public void SetTRS(Vector3 position, Quaternion rotation, Vector3 scale)
+        {
+            this = TRS(position, rotation, scale);
+        }
+        public static Mat4X4 TRS(Vector3 position, Quaternion rotation, Vector3 scale)
+        {
+            return Translate(position) * Rotate(rotation) * Scale(scale);
+        }
         public static Mat4X4 Translate(Vector3 vec)
         {
             Mat4X4 matTrans = identity;
