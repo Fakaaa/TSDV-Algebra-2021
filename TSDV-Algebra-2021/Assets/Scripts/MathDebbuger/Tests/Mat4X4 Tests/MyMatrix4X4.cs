@@ -108,7 +108,6 @@ public class MyMatrix4X4 : MonoBehaviour
         //----------------------------
     }
 
-
     public void DebugMatrix(Matrix4x4 mat)
     {
         Debug.Log("[" + mat.m00.ToString() + "][" + mat.m01.ToString() + "][" + mat.m02.ToString() + "][" + mat.m03.ToString() + "]");
