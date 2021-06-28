@@ -186,7 +186,7 @@ namespace CustomMath
         }
         public void Inverse()
         {
-
+            //Throw not implemented exception xd
         }
         public Vector4 GetColumn(int index)
         {

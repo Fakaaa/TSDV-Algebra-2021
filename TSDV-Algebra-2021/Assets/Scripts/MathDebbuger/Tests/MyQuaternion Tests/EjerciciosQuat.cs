@@ -67,7 +67,6 @@ public class EjerciciosQuat : MonoBehaviour
                             vectoresEjer3[i] = MyQuaternion.Euler(new Vec3(Angle, Angle, 0)) * new Vec3(vectoresEjer3[i]);
                     }
                 }
-                Matrix4x4 se = Matrix4x4.identity;
                 VectorDebugger.DisableEditorView("vec");
                 VectorDebugger.DisableEditorView("vectores");
                 VectorDebugger.EnableEditorView("vectores2");

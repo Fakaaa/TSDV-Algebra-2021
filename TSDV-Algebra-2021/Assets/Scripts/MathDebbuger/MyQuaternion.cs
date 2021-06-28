@@ -11,7 +11,7 @@ namespace CustomMath
         public float z;
         public float w;
 
-        #region constants
+        #region CONSTANTS
         public const float kEpsilon = 1e-06f;
         public const float i = 1.0f;
         public const float j = 1.0f;
@@ -51,6 +51,8 @@ namespace CustomMath
                 return identityQuat;
             }
         }
+
+        #region METHODS
         public void Set(float x, float y, float z, float w)
         {
             this.x = x; this.y = y;
@@ -235,6 +237,8 @@ namespace CustomMath
         {
             return "X = " + x.ToString() + "   Y = " + y.ToString() + "   Z = " + z.ToString() + "   W = " + w.ToString();
         }
+        #endregion
+
         #region Internals
         public override bool Equals(object other)
         {
