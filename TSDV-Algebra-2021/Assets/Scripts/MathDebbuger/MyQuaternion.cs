@@ -281,6 +281,14 @@ namespace CustomMath
         {
             return "X = " + x.ToString() + "   Y = " + y.ToString() + "   Z = " + z.ToString() + "   W = " + w.ToString();
         }
+        public static bool operator ==(MyQuaternion a, MyQuaternion b)
+        {
+            return (Dot(a,b) > 0.999999f);
+        }
+        public static bool operator !=(MyQuaternion a, MyQuaternion b)
+        {
+            return (Dot(a, b) <= 0.999999f);
+        }
         #endregion
 
         #region Internals
@@ -292,6 +300,19 @@ namespace CustomMath
         public bool Equals(MyQuaternion other)
         {
             return x == other.x && y == other.y && z == other.z && w == other.w;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 474171627;
+            hashCode = hashCode * -1521134295 + x.GetHashCode();
+            hashCode = hashCode * -1521134295 + y.GetHashCode();
+            hashCode = hashCode * -1521134295 + z.GetHashCode();
+            hashCode = hashCode * -1521134295 + w.GetHashCode();
+            hashCode = hashCode * -1521134295 + convertQuat.GetHashCode();
+            hashCode = hashCode * -1521134295 + normalized.GetHashCode();
+            hashCode = hashCode * -1521134295 + EulerAngles.GetHashCode();
+            return hashCode;
         }
         #endregion
     }

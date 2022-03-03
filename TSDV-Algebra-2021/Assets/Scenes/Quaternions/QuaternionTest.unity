@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rerfObject: {fileID: 764270583}
-  speedRotate: 0.1
+  speedRotate: 0.2
 --- !u!1 &562019263 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3094596120490773927, guid: 6488e52bfa07cc0418cde38e2bfac01d,
