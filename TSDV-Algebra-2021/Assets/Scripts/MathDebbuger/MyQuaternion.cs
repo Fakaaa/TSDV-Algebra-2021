@@ -52,6 +52,50 @@ namespace CustomMath
             }
         }
 
+        public Vec3 EulerAngles
+        {
+            get
+            {
+                // Cos(ang°/2) + Sin(ang°/2)(i + j + k) <- Formula de quaterniones en base a angulos.
+                // W es el Cos(ang°/2)
+                // con estos calculos se calcula la forma de un quaternion base
+
+                float sinX = 2 * (w * x + y * z);
+                float cosX = 1 - 2 * (x * x + y * y);
+                float eulerX = Mathf.Atan2(sinX, cosX) * Mathf.Rad2Deg;
+
+                float sinY = 2 * (w * y - z * x);
+                float eulerY = Mathf.PI / 2;
+
+                if (Mathf.Abs(sinY) >= 1)
+                {
+                    if (sinY < 0)
+                    {
+                        eulerY = -eulerY;
+                    }
+                }
+                else
+                {
+                    eulerY = Mathf.Asin(sinY) * Mathf.Rad2Deg;
+                }
+
+                float sinZ = 2 * (w * z + x * y);
+                float cosZ = 1 - 2 * (y * y + z * z);
+                float eulerZ = Mathf.Atan2(sinZ, cosZ) * Mathf.Rad2Deg;
+
+                return new Vec3(eulerX, eulerY, eulerZ);
+            }
+            set
+            {
+                MyQuaternion newQuat = Euler(value);
+
+                x = newQuat.x;
+                y = newQuat.y;
+                z = newQuat.z;
+                z = newQuat.w;
+            }
+        }
+
         #region METHODS
         public void Set(float x, float y, float z, float w)
         {
