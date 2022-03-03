@@ -247,6 +247,19 @@ namespace CustomMath
         {
             return x == other.x && y == other.y && z == other.z;
         }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1636739968;
+            hashCode = hashCode * -1521134295 + x.GetHashCode();
+            hashCode = hashCode * -1521134295 + y.GetHashCode();
+            hashCode = hashCode * -1521134295 + z.GetHashCode();
+            hashCode = hashCode * -1521134295 + sqrMagnitude.GetHashCode();
+            hashCode = hashCode * -1521134295 + normalized.GetHashCode();
+            hashCode = hashCode * -1521134295 + magnitude.GetHashCode();
+            hashCode = hashCode * -1521134295 + convertVec.GetHashCode();
+            return hashCode;
+        }
         #endregion
     }
 }

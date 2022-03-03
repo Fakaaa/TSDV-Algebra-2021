@@ -425,6 +425,31 @@ namespace CustomMath
             else
                 return false;
         }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 1266933948;
+            hashCode = hashCode * -1521134295 + m00.GetHashCode();
+            hashCode = hashCode * -1521134295 + m01.GetHashCode();
+            hashCode = hashCode * -1521134295 + m02.GetHashCode();
+            hashCode = hashCode * -1521134295 + m03.GetHashCode();
+            hashCode = hashCode * -1521134295 + m10.GetHashCode();
+            hashCode = hashCode * -1521134295 + m11.GetHashCode();
+            hashCode = hashCode * -1521134295 + m12.GetHashCode();
+            hashCode = hashCode * -1521134295 + m13.GetHashCode();
+            hashCode = hashCode * -1521134295 + m20.GetHashCode();
+            hashCode = hashCode * -1521134295 + m21.GetHashCode();
+            hashCode = hashCode * -1521134295 + m22.GetHashCode();
+            hashCode = hashCode * -1521134295 + m23.GetHashCode();
+            hashCode = hashCode * -1521134295 + m30.GetHashCode();
+            hashCode = hashCode * -1521134295 + m31.GetHashCode();
+            hashCode = hashCode * -1521134295 + m32.GetHashCode();
+            hashCode = hashCode * -1521134295 + m33.GetHashCode();
+            hashCode = hashCode * -1521134295 + transpose.GetHashCode();
+            hashCode = hashCode * -1521134295 + rotation.GetHashCode();
+            hashCode = hashCode * -1521134295 + lossyScale.GetHashCode();
+            return hashCode;
+        }
         #endregion
     }
 }
